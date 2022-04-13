@@ -1,0 +1,23 @@
+$light-font-color: #FFFFFF
+$dark-font-color: #000000
+$button-color: #F39C12
+$word-color: #EBEBEB
+
+*
+	margin: 0
+	padding: 0
+
+@mixin mix-button($bg-color: $button-color, $color: $light-font-color)
+	background-color: $bg-color
+	color: $color
+	display: flex
+	justify-content: center
+	align-items: center
+	width: 200px
+	height: 50px
+	border-radius: 25px
+	border: none
+	cursor: pointer
+
+@import 'form'
+@import 'cards'

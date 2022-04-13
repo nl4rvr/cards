@@ -1,0 +1,45 @@
+form 
+	height: 120px
+	display: flex
+	justify-content: space-around
+	align-items: center
+	width: 100%
+	padding: 30px
+	box-sizing: border-box
+	.add
+		display: flex
+		justify-content: space-between
+		align-items: center
+		width: 843px
+		box-sizing: border-box
+		border: 2px solid $dark-font-color
+		border-radius: 15px
+		padding: 25px
+		input
+			box-sizing: border-box
+			width: 150px
+			height: 50px
+			padding-left: 20px
+			border-radius: 25px
+			border: none
+			background-color: $word-color
+	.find
+		display: flex
+		justify-content: center
+		align-items: center
+		width: 500px
+		box-sizing: border-box
+		border: 2px solid $dark-font-color
+		border-radius: 15px
+		padding: 25px
+		input
+			box-sizing: border-box
+			width: 400px
+			height: 50px
+			border-radius: 25px
+			border: none
+			background-color: $word-color
+			padding-left: 25px
+
+.button
+	@include mix-button
