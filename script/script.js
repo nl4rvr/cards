@@ -7,7 +7,12 @@ const translationElem = formElem.translation;
 
 
 
-let cards = [];
+const get_card = () => JSON.parse(localStorage.getItem('card')) || [];
+const add_card = card => localStorage.setItem('card', JSON.stringify([...get_card(),card]));
+const remove_card = card =>{
+    const new_list = get_card().filter(elem => elem.word !== card.word);
+    localStorage.setItem('card', JSON.stringify(new_list))
+}
 
 function render(words) {
     cardsElem.innerText = '';
@@ -17,18 +22,17 @@ function render(words) {
         const cardsWordElem = document.createElement('p');
 
         closeElem.addEventListener('click', () => {
-            findElem.value = '';
-            cards = cards.filter(elem => elem.word != (words[i].word || words[i].translation));
-            render(cards);
+           remove_card(words[i]);
+            render(get_card());
         });
 
         let translate = true;
         card.addEventListener('dblclick', () => {
             if (translate == true) {
-                cardsWordElem.innerText = cards[i].translation;
+                cardsWordElem.innerText = get_card()[i].translation;
                 translate = false;
             } else {
-                cardsWordElem.innerText = cards[i].word;
+                cardsWordElem.innerText = get_card()[i].word;
                 translate = true;
             }
         });
@@ -47,21 +51,22 @@ function render(words) {
 formElem.addEventListener('submit', event => {
     event.preventDefault();
     if (wordElem.value != '' && translationElem.value != '' && colorElem.value != '') {
-        cards.push({
+         add_card({
             word: wordElem.value,
             translation: translationElem.value,
             color: colorElem.value,
         });
     } else {
-        alert('нужно заполнить все поля ввода!');
+        alert('нужно заполнить всё');
     }
     wordElem.value = '';
     colorElem.value = '';
     translationElem.value = '';
-    render(cards);
+     render(get_card());
 });
 
 findElem.addEventListener('input', event => {
     const value = event.target.value;
     render(value.length ? cards.filter(elem => elem.word.startsWith(value)) : cards);
 });
+render(get_card());
